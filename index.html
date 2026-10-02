@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bossbozo — AI-powered referrals and career connections. Launching soon.">
+  <title>Bossbozo — Your Next Opportunity Starts Here</title>
+  <style>
+    :root {
+      --black: #030303;
+      --surface: #0a0a0f;
+      --surface2: #11111a;
+      --white: #ffffff;
+      --muted: #a7a9b8;
+      --line: rgba(255,255,255,.10);
+      --blue: #087cff;
+      --purple: #9b22ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      color: var(--white);
+      background:
+        radial-gradient(900px 500px at 5% 0%, rgba(0, 91, 255, .20), transparent 65%),
+        radial-gradient(850px 500px at 100% 10%, rgba(154, 22, 255, .18), transparent 65%),
+        radial-gradient(700px 400px at 50% 100%, rgba(0, 136, 255, .08), transparent 65%),
+        var(--black);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .035;
+      z-index: 10;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .nav-logo {
+      width: 155px;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      /* The source image has a black background, which intentionally blends with the page. */
+    }
+
+    .status {
+      border: 1px solid rgba(142, 86, 255, .42);
+      background: rgba(105, 41, 210, .10);
+      color: #d9caff;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    .hero {
+      flex: 1;
+      min-height: calc(100vh - 92px);
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 50px;
+      padding: 72px 0 90px;
+    }
+
+    .eyebrow {
+      color: #91b9ff;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      max-width: 720px;
+      font-size: clamp(52px, 7.4vw, 96px);
+      line-height: .94;
+      letter-spacing: -.065em;
+    }
+
+    h1 span {
+      background: linear-gradient(100deg, #fff 10%, #86bcff 52%, #bd6dff 92%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .copy {
+      max-width: 620px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.7;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 13px;
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 14px;
+    }
+
+    .primary {
+      color: #fff;
+      background: linear-gradient(100deg, #087cff, #7c20ff);
+      box-shadow: 0 15px 45px rgba(61, 61, 255, .25);
+    }
+
+    .secondary {
+      color: #d6d8e6;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
+    }
+
+    .visual {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orb {
+      position: absolute;
+      width: 390px;
+      height: 390px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(0, 144, 255, .9), transparent 26%),
+        radial-gradient(circle at 70% 70%, rgba(172, 35, 255, .85), transparent 32%),
+        linear-gradient(135deg, rgba(0, 115, 255, .45), rgba(143, 20, 255, .38));
+      filter: blur(18px);
+      opacity: .55;
+    }
+
+    .glass {
+      position: relative;
+      width: min(490px, 100%);
+      padding: 42px 32px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(22,24,35,.82), rgba(7,7,11,.68));
+      box-shadow: 0 35px 100px rgba(0,0,0,.55);
+      backdrop-filter: blur(20px);
+    }
+
+    .mini-logo {
+      width: 250px;
+      max-width: 80%;
+      display: block;
+      margin: 0 auto 34px;
+      border-radius: 10px;
+      mix-blend-mode: screen;
+    }
+
+    .glass h2 {
+      text-align: center;
+      font-size: 25px;
+      letter-spacing: -.025em;
+    }
+
+    .glass p {
+      text-align: center;
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .pill-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 25px;
+    }
+
+    .pill {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #cdd0df;
+      font-size: 12px;
+      background: rgba(255,255,255,.025);
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 22px 0;
+      color: #666a7b;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 55px;
+      }
+      .visual { min-height: 390px; }
+      .orb { width: 300px; height: 300px; }
+      h1 { max-width: 700px; }
+    }
+
+    @media (max-width: 520px) {
+      .page { width: min(100% - 26px, 1180px); }
+      nav { height: 76px; }
+      .nav-logo { width: 125px; }
+      .status { font-size: 10px; padding: 7px 10px; }
+      .hero { padding: 45px 0 55px; }
+      .glass { padding: 32px 22px; }
+      footer { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+
+  <div class="page">
+    <nav>
+      <img class="nav-logo" src="bossbozo-logo.png" alt="Bossbozo">
+      <div class="status">LAUNCHING SOON</div>
+    </nav>
+
+    <main class="hero">
+      <section>
+        <div class="eyebrow">The future of career referrals</div>
+        <h1>Your next opportunity <span>starts with the right connection.</span></h1>
+
+        <p class="copy">
+          Bossbozo is building an AI-powered platform designed to make finding
+          referrals, reaching the right people, and moving closer to your next
+          opportunity simpler.
+        </p>
+
+        <div class="cta-row">
+          <a class="button primary" href="mailto:hello@bossbozo.com">Get notified</a>
+          <a class="button secondary" href="#about">What is Bossbozo?</a>
+        </div>
+      </section>
+
+      <section class="visual" id="about">
+        <div class="orb"></div>
+        <div class="glass">
+          <img class="mini-logo" src="bossbozo-logo.png" alt="Bossbozo logo">
+          <h2>Connect. Refer. Get Hired.</h2>
+          <p>
+            One place to discover opportunities, identify relevant connections,
+            and simplify the referral journey with AI.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">AI-powered</span>
+            <span class="pill">Smart matching</span>
+            <span class="pill">Referrals</span>
+            <span class="pill">Career growth</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Bossbozo</span>
+      <span>bossbozo.com</span>
+    </footer>
+  </div>
+</body>
+</html>
